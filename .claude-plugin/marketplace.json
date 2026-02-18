@@ -1,0 +1,32 @@
+{
+  "name": "claude-statusline",
+  "owner": {
+    "name": "Yanis"
+  },
+  "metadata": {
+    "description": "Advanced statusline plugin for Claude Code with git branch, path, token context, and progress bar",
+    "version": "0.5.0",
+    "homepage": "https://github.com/Pamacea/claude-statusline"
+  },
+  "plugins": [
+    {
+      "name": "statusline",
+      "source": "./plugins/statusline",
+      "description": "Advanced statusline plugin for Claude Code with git branch, path, token context, and progress bar",
+      "version": "0.5.0",
+      "author": {
+        "name": "Yanis"
+      },
+      "category": "productivity",
+      "homepage": "https://github.com/Pamacea/claude-statusline",
+      "keywords": [
+        "statusline",
+        "git",
+        "context",
+        "tokens",
+        "progress-bar",
+        "ui"
+      ]
+    }
+  ]
+}
