@@ -1,0 +1,31 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "claude-statusline",
+  "version": "0.6.0",
+  "description": "Advanced statusline plugin for Claude Code with git branch, path, token context, cost tracking, and progress bar",
+  "owner": {
+    "name": "Yanis"
+  },
+  "plugins": [
+    {
+      "name": "statusline",
+      "source": "./plugins/statusline",
+      "description": "Advanced statusline plugin for Claude Code with git branch, path, token context, and progress bar. Run /setup after installation to configure.",
+      "version": "0.6.0",
+      "author": {
+        "name": "Yanis"
+      },
+      "category": "productivity",
+      "homepage": "https://github.com/Pamacea/claude-statusline",
+      "keywords": [
+        "statusline",
+        "git",
+        "context",
+        "tokens",
+        "progress-bar",
+        "ui",
+        "cost-tracking"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "oneLine": false,
+  "showSonnetModel": false,
+  "pathDisplayMode": "truncated",
+  "git": {
+    "enabled": true,
+    "showBranch": true,
+    "showDirtyIndicator": true,
+    "showChanges": true,
+    "showStaged": false,
+    "showUnstaged": false
+  },
+  "separator": "|",
+  "session": {
+    "infoSeparator": "•",
+    "cost": { "enabled": true, "format": "decimal1" },
+    "duration": { "enabled": true },
+    "tokens": { "enabled": true, "showMax": true, "showDecimals": true },
+    "percentage": {
+      "enabled": true,
+      "showValue": true,
+      "progressBar": {
+        "enabled": true,
+        "length": 10,
+        "style": "filled",
+        "color": "progressive",
+        "background": "none"
+      }
+    }
+  },
+  "context": {
+    "usePayloadContextWindow": true,
+    "maxContextTokens": 200000,
+    "autocompactBufferTokens": 0,
+    "useUsableContextOnly": false,
+    "overheadTokens": 2000
+  },
+  "limits": {
+    "enabled": false,
+    "showTimeLeft": true,
+    "showPacingDelta": true,
+    "cost": { "enabled": true, "format": "decimal1" },
+    "percentage": {
+      "enabled": true,
+      "showValue": false,
+      "progressBar": {
+        "enabled": true,
+        "length": 10,
+        "style": "rectangle",
+        "color": "progressive",
+        "background": "none"
+      }
+    }
+  },
+  "weeklyUsage": {
+    "enabled": false,
+    "showTimeLeft": true,
+    "showPacingDelta": true,
+    "cost": { "enabled": true, "format": "decimal1" },
+    "percentage": {
+      "enabled": true,
+      "showValue": false,
+      "progressBar": {
+        "enabled": true,
+        "length": 10,
+        "style": "rectangle",
+        "color": "progressive",
+        "background": "none"
+      }
+    }
+  },
+  "dailySpend": {
+    "cost": { "enabled": false, "format": "decimal1" }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "description": "Statusline plugin - Display git branch, path, token context, and progress bar",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/dist/session-start.js",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/dist/user-prompt-submit.js",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
