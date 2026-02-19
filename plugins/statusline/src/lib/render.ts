@@ -119,20 +119,44 @@ function formatGitPart(
 
   const changeParts: string[] = [];
 
-  if (config.showChanges) {
+  // Show staged changes first (with cyan color to indicate staged)
+  if (config.showStaged && (git.staged.files > 0 || git.staged.added > 0 || git.staged.deleted > 0)) {
+    const stagedParts: string[] = [];
+    if (git.staged.added > 0) stagedParts.push(colors.cyan(`+${git.staged.added}`));
+    if (git.staged.deleted > 0) stagedParts.push(colors.cyan(`-${git.staged.deleted}`));
+    if (config.showStaged && git.staged.files > 0) stagedParts.push(colors.cyan(`[${git.staged.files}]`));
+
+    if (stagedParts.length > 0) {
+      changeParts.push(stagedParts.join(" "));
+    }
+  }
+
+  // Show unstaged changes (with standard green/red colors)
+  if (config.showUnstaged || config.showChanges) {
+    const unstagedParts: string[] = [];
+    if (git.unstaged.added > 0) unstagedParts.push(colors.green(`+${git.unstaged.added}`));
+    if (git.unstaged.deleted > 0) unstagedParts.push(colors.red(`-${git.unstaged.deleted}`));
+    if (config.showUnstaged && git.unstaged.files > 0) {
+      unstagedParts.push(colors.yellow(`[${git.unstaged.files}]`));
+    }
+
+    if (unstagedParts.length > 0) {
+      changeParts.push(unstagedParts.join(" "));
+    }
+  }
+
+  // Fallback to total changes if detailed display is disabled
+  if (changeParts.length === 0 && config.showChanges) {
     const totalAdded = git.staged.added + git.unstaged.added;
     const totalDeleted = git.staged.deleted + git.unstaged.deleted;
 
     if (totalAdded > 0) changeParts.push(colors.green(`+${totalAdded}`));
     if (totalDeleted > 0) changeParts.push(colors.red(`-${totalDeleted}`));
-  }
 
-  if (config.showStaged && git.staged.files > 0) {
-    changeParts.push(colors.gray(`~${git.staged.files}`));
-  }
-
-  if (config.showUnstaged && git.unstaged.files > 0) {
-    changeParts.push(colors.yellow(`~${git.unstaged.files}`));
+    const totalFiles = git.staged.files + git.unstaged.files;
+    if (totalFiles > 0) {
+      changeParts.push(colors.yellow(`[${totalFiles}]`));
+    }
   }
 
   if (changeParts.length > 0) {
@@ -377,6 +401,20 @@ function formatDailyPart(
 }
 
 // ─────────────────────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────────────────────
+
+/**
+ * Extract model version number from display name
+ * Examples: "Claude Sonnet 4.5" -> "4.5", "Claude Opus 4.6" -> "4.6"
+ */
+function extractModelVersion(modelName: string): string | null {
+  // Match version number (X.Y or X.Y.Z)
+  const match = modelName.match(/(\d+\.\d+(?:\.\d+)?)/);
+  return match ? match[1] : null;
+}
+
+// ─────────────────────────────────────────────────────────────
 // MAIN RENDER FUNCTION - Raw data + config = output
 // ─────────────────────────────────────────────────────────────
 
@@ -396,8 +434,11 @@ export function renderStatuslineRaw(
   const pathPart = formatPath(data.path, config.pathDisplayMode);
   line1Parts.push(colors.gray(pathPart));
 
-  const isSonnet = data.modelName.toLowerCase().includes("sonnet");
-  if (!isSonnet || config.showSonnetModel) {
+  // Extract model version (e.g., "4.5" from "Claude Sonnet 4.5")
+  const modelVersion = extractModelVersion(data.modelName);
+  if (modelVersion) {
+    line1Parts.push(colors.peach(`S: ${modelVersion}`));
+  } else if (config.showSonnetModel || !data.modelName.toLowerCase().includes("sonnet")) {
     line1Parts.push(colors.peach(data.modelName));
   }
 

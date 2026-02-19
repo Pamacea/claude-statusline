@@ -145,6 +145,7 @@ export function formatTokens(tokens: number, showDecimals = true): string {
 
 /**
  * Format duration in milliseconds to human readable
+ * Enhanced for v0.6.0: more compact format
  */
 export function formatDuration(ms: number): string {
   const minutes = Math.floor(ms / 60000);
@@ -152,7 +153,7 @@ export function formatDuration(ms: number): string {
   const mins = minutes % 60;
 
   if (hours > 0) {
-    return `${hours}h ${mins}m`;
+    return mins > 0 ? `${hours}h${mins}m` : `${hours}h`;
   }
   return `${mins}m`;
 }
