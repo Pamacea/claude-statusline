@@ -1,5 +1,5 @@
 {
-  "name": "statusline",
+  "name": "claude-statusline-marketplace",
   "version": "0.7.1",
   "description": "Claude Code Statusline Plugin - Enhanced with git status, cost tracking, and cross-platform support",
   "type": "module",
@@ -7,7 +7,7 @@
   "author": "Yanis <yanis@example.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Pamacea/statusline.git"
+    "url": "https://github.com/Pamacea/claude-statusline.git"
   },
   "scripts": {
     "build": "tsc --project plugins/statusline/tsconfig.json && node scripts/build.mjs",
